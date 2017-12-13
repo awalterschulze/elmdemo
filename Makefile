@@ -5,3 +5,6 @@ build:
 
 run:
 	elm-reactor
+
+installnavigation:
+	elm-package install elm-lang/navigation
