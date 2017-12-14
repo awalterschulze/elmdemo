@@ -16,11 +16,11 @@ view model =
     ]
 
 viewStar : Int -> Html Msg
-viewStar index = span [style [("color", chooseColor index)]]
+viewStar index = span [style [("color", chooseColor (index % 4))]]
   [text "*"]
 
 chooseColor : Int -> String
-chooseColor c = case c % 4 of
+chooseColor c = case c of
   0 -> "red"
   1 -> "yellow"
   2 -> "blue"

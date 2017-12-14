@@ -29,11 +29,11 @@ view model =
     ]
 
 viewLetter : Int -> Html Msg
-viewLetter index = span [style [("color", chooseColor index)]]
+viewLetter index = span [style [("color", chooseColor (index % 4))]]
   [text (chooseLetter index)]
 
 chooseColor : Int -> String
-chooseColor c = case c % 4 of
+chooseColor c = case c of
   0 -> "red"
   1 -> "yellow"
   2 -> "blue"

@@ -5,6 +5,7 @@ build:
 	elm-make ./src/Stars2.elm --output=./stars2.js
 	elm-make ./src/Letters3.elm --output=./letters3.js
 	elm-make ./src/Navigation4.elm --output=./navigation4.js
+	elm-make ./src/Textbox5.elm --output=./textbox5.js
 
 run:
 	elm-reactor

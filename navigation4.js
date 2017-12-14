@@ -9933,7 +9933,7 @@ var _user$project$Main$chooseLetter = function (index) {
 	}
 };
 var _user$project$Main$chooseColor = function (c) {
-	var _p2 = A2(_elm_lang$core$Basics_ops['%'], c, 4);
+	var _p2 = c;
 	switch (_p2) {
 		case 0:
 			return 'red';
@@ -9958,7 +9958,8 @@ var _user$project$Main$viewLetter = function (index) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'color',
-						_1: _user$project$Main$chooseColor(index)
+						_1: _user$project$Main$chooseColor(
+							A2(_elm_lang$core$Basics_ops['%'], index, 4))
 					},
 					_1: {ctor: '[]'}
 				}),
