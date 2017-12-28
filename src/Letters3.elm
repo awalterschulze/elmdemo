@@ -37,7 +37,7 @@ word : String
 word = "TreeBay"
 
 charDict : Dict.Dict Int String
-charDict = Dict.fromList <| List.indexedMap (\index char -> (index, String.fromChar char)) <| String.toList word
+charDict = String.toList word |> List.indexedMap (\index char -> (index, String.fromChar char)) |> Dict.fromList
 
 type Msg = Increment 
   | Decrement
