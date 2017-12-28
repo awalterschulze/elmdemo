@@ -12,3 +12,6 @@ run:
 
 installnavigation:
 	elm-package install elm-lang/navigation
+
+test:
+	elm-test
