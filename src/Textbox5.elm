@@ -2,7 +2,7 @@ import Html exposing (beginnerProgram, div, button, text, Html, span, label, inp
 import Html.Events exposing (onClick, onWithOptions, targetValue, Options)
 import Html.Attributes exposing (style, value)
 import Navigation
-import UrlParser exposing (s, parsePath, top, (<?>), (</>), intParam, stringParam, map)
+import UrlParser exposing (s, parsePath, top, (<?>), (</>), intParam, stringParam, Parser)
 import Json.Decode as Json
 import Dict
 
@@ -33,7 +33,7 @@ urlSpec : UrlParser.Parser (Maybe.Maybe Int -> Maybe.Maybe String -> a) a
 urlSpec = top <?> intParam "num" <?> stringParam "word"
 
 urlpath : UrlParser.Parser (Model -> Model) Model
-urlpath = map parseModel urlSpec
+urlpath = UrlParser.map parseModel urlSpec
 
 init : Navigation.Location -> (Model, Cmd Msg)
 init location = 
