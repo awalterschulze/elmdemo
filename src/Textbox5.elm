@@ -23,10 +23,23 @@ type alias Model = {
 newModel : Int -> String -> Model
 newModel num word = Model num (newCharDict word) word (String.length word)
 
+parseModel : Maybe Int -> Maybe String -> Model
+parseModel maybeNum maybeStr = 
+    let num = Maybe.withDefault 0 maybeNum
+        word = Maybe.withDefault "" maybeStr
+    in newModel num word
+
+urlSpec : UrlParser.Parser (Maybe.Maybe Int -> Maybe.Maybe String -> a) a
+urlSpec = top <?> intParam "num" <?> stringParam "word"
+
+urlpath : UrlParser.Parser (Model -> Model) Model
+urlpath = map parseModel urlSpec
+
 init : Navigation.Location -> (Model, Cmd Msg)
-init location = let l = { location | pathname = "" }
-    in case parsePath (map (Maybe.map2 newModel) (top <?> intParam "num" <?> stringParam "word")) l of
-    (Just (Just m)) -> (m, Cmd.none)
+init location = 
+    let loc = { location | pathname = "" } -- we only want to parse the url parameters and we don't care about the rest of the path.
+    in case parsePath urlpath loc of
+    (Just model) -> (model, Cmd.none)
     _ -> (newModel 0 "", Cmd.none)
 
 view : Model -> Html Msg

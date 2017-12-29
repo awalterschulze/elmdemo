@@ -9966,6 +9966,13 @@ var _user$project$Main$viewLetter = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _user$project$Main$urlSpec = A2(
+	_evancz$url_parser$UrlParser_ops['<?>'],
+	A2(
+		_evancz$url_parser$UrlParser_ops['<?>'],
+		_evancz$url_parser$UrlParser$top,
+		_evancz$url_parser$UrlParser$intParam('num')),
+	_evancz$url_parser$UrlParser$stringParam('word'));
 var _user$project$Main$Model = F4(
 	function (a, b, c, d) {
 		return {num: a, letters: b, word: c, size: d};
@@ -9979,25 +9986,20 @@ var _user$project$Main$newModel = F2(
 			word,
 			_elm_lang$core$String$length(word));
 	});
+var _user$project$Main$parseModel = F2(
+	function (maybeNum, maybeStr) {
+		var word = A2(_elm_lang$core$Maybe$withDefault, '', maybeStr);
+		var num = A2(_elm_lang$core$Maybe$withDefault, 0, maybeNum);
+		return A2(_user$project$Main$newModel, num, word);
+	});
+var _user$project$Main$urlpath = A2(_evancz$url_parser$UrlParser$map, _user$project$Main$parseModel, _user$project$Main$urlSpec);
 var _user$project$Main$init = function (location) {
-	var l = _elm_lang$core$Native_Utils.update(
+	var loc = _elm_lang$core$Native_Utils.update(
 		location,
 		{pathname: ''});
-	var _p4 = A2(
-		_evancz$url_parser$UrlParser$parsePath,
-		A2(
-			_evancz$url_parser$UrlParser$map,
-			_elm_lang$core$Maybe$map2(_user$project$Main$newModel),
-			A2(
-				_evancz$url_parser$UrlParser_ops['<?>'],
-				A2(
-					_evancz$url_parser$UrlParser_ops['<?>'],
-					_evancz$url_parser$UrlParser$top,
-					_evancz$url_parser$UrlParser$intParam('num')),
-				_evancz$url_parser$UrlParser$stringParam('word'))),
-		l);
-	if ((_p4.ctor === 'Just') && (_p4._0.ctor === 'Just')) {
-		return {ctor: '_Tuple2', _0: _p4._0._0, _1: _elm_lang$core$Platform_Cmd$none};
+	var _p4 = A2(_evancz$url_parser$UrlParser$parsePath, _user$project$Main$urlpath, loc);
+	if (_p4.ctor === 'Just') {
+		return {ctor: '_Tuple2', _0: _p4._0, _1: _elm_lang$core$Platform_Cmd$none};
 	} else {
 		return {
 			ctor: '_Tuple2',
